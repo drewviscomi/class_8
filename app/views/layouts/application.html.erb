@@ -10,18 +10,21 @@
   </head>
 
   <body>
-    <p>
-      <!-- if no user logged-in, display signup and login links -->
-      <!-- else, if user logged-in, display user name and logout link -->
+  <p>
+    <% if session["user_id"] == nil %>
       <a href="/users/new">Sign Up</a>
       |
       <a href="/login">Login</a>
+    <% else %>
+      Welcome, <%= User.find(session["user_id"])["first_name"] %>!
       |
       <a href="/logout">Logout</a>
-    </p>
+    <% end %>
+  </p>
 
     <p>
       <%= flash["notice"] %>
+      USER ID: <%= session["user_id"] %>
     </p>
 
     <%= yield %>
