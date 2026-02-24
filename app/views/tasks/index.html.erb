@@ -1,20 +1,24 @@
-<h1>Do the TODOs</h1>
+<h1>Tasks</h1>
 
 <form action="/tasks" method="post">
-  <input type="text" name="description">
-  <button>Add new task</button>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div style="display:flex; gap:12px; max-width:600px; margin-bottom:40px;">
+    <input type="text" name="description" placeholder="Add a new task..." style="flex:1; background:#111; border:1px solid #333; color:#f0f0f0; padding:12px 16px; font-family:'Space Grotesk',sans-serif; font-size:1rem; outline:none;">
+    <button style="background:linear-gradient(90deg, #ff3cac, #784ba0); color:#fff; border:none; padding:12px 24px; font-family:'Space Grotesk',sans-serif; font-size:0.85rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Add</button>
+  </div>
 </form>
 
-<table>
+<table style="width:100%; max-width:600px; border-collapse:collapse;">
   <% for task in @tasks %>
-    <tr>
-      <td>
+    <tr style="border-bottom:1px solid #222;">
+      <td style="padding:16px 0; font-size:1rem; letter-spacing:1px;">
         <%= task["description"] %>
       </td>
-      <td>
+      <td style="text-align:right; padding:16px 0;">
         <form action="/tasks/<%= task["id"] %>" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
           <input type="hidden" name="_method" value="delete">
-          <button>Complete</button>
+          <button style="background:none; border:1px solid #333; color:#784ba0; padding:8px 16px; font-family:'Space Grotesk',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3cac';this.style.color='#ff3cac'" onmouseout="this.style.borderColor='#333';this.style.color='#784ba0'">Complete</button>
         </form>
       </td>
     </tr>

@@ -1,13 +1,19 @@
 <h1>Login</h1>
 
 <form action="/sessions" method="post">
-  <p>
-    <label for="email_input">Email</label>
-    <input type="text" name="email" id="email_input">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  
+  <div style="display:flex; flex-direction:column; gap:20px; max-width:400px;">
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <label style="font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; color:#784ba0;">Email</label>
+      <input type="text" name="email" id="email_input" style="background:#111; border:1px solid #333; color:#f0f0f0; padding:12px 16px; font-family:'Space Grotesk',sans-serif; font-size:1rem; outline:none;">
+    </div>
 
-    <label for="password_input">Password</label>
-    <input type="password" name="password" id="password_input">
-  </p>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <label style="font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; color:#784ba0;">Password</label>
+      <input type="password" name="password" id="password_input" style="background:#111; border:1px solid #333; color:#f0f0f0; padding:12px 16px; font-family:'Space Grotesk',sans-serif; font-size:1rem; outline:none;">
+    </div>
 
-  <button>Login</button>
+    <button style="background: linear-gradient(90deg, #ff3cac, #784ba0); color:#fff; border:none; padding:14px 40px; font-family:'Space Grotesk',sans-serif; font-size:0.85rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Login</button>
+  </div>
 </form>

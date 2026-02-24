@@ -5,28 +5,46 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application" %>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background-color: #0a0a0a; color: #f0f0f0; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+      nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid #222; }
+      nav .logo { font-size: 1.2rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #ff3cac; }
+      nav .nav-links { display: flex; align-items: center; gap: 20px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+      nav .nav-links a { color: #f0f0f0; text-decoration: none; transition: color 0.2s; }
+      nav .nav-links a:hover { color: #ff3cac; }
+      .welcome { color: #784ba0; font-weight: 700; }
+      .flash { background: linear-gradient(90deg, #ff3cac22, #784ba022); border-left: 3px solid #ff3cac; padding: 12px 40px; font-size: 0.85rem; letter-spacing: 1px; color: #ff3cac; }
+      .content { padding: 60px 40px; }
+      h1 { font-size: 3rem; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; }
+      a { color: #784ba0; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; transition: color 0.2s; }
+      a:hover { color: #ff3cac; }
+    </style>
   </head>
-
   <body>
-  <p>
-    <% if session["user_id"] == nil %>
-      <a href="/users/new">Sign Up</a>
-      |
-      <a href="/login">Login</a>
-    <% else %>
-      Welcome, <%= User.find(session["user_id"])["first_name"] %>!
-      |
-      <a href="/logout">Logout</a>
+    <nav>
+      <div class="logo">&#9679; CRM</div>
+      <div class="nav-links">
+        <% if session["user_id"] == nil %>
+          <a href="/users/new">Sign Up</a>
+          <span style="color:#333">|</span>
+          <a href="/login">Login</a>
+        <% else %>
+          <span class="welcome">Welcome, <%= User.find(session["user_id"])["first_name"] %>!</span>
+          <span style="color:#333">|</span>
+          <a href="/logout">Logout</a>
+        <% end %>
+      </div>
+    </nav>
+
+    <% if flash["notice"] %>
+      <div class="flash"><%= flash["notice"] %></div>
     <% end %>
-  </p>
 
-    <p>
-      <%= flash["notice"] %>
-      USER ID: <%= session["user_id"] %>
-    </p>
-
-    <%= yield %>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
